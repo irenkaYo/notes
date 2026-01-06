@@ -13,18 +13,26 @@ app.MapPost("create_note", (CreateNoteDto createNote) =>
 
 app.MapGet("get_all_notes", () =>
 {
-    //poka nepon List<NoteResponseDto> откуда это 
     IReadOnlyList<Note> notes = service.GetNotes();
-    
-    var result = notes.Select(x => new NoteResponseDto(x.Id, x.Title, x.Content)).ToList();
+    List<NoteResponseDto> result = new List<NoteResponseDto>();
+    foreach (Note note in notes)
+    {
+        result.Add(new NoteResponseDto(note.Id, note.Title, note.Content));
+    }
     return result;
-    
 });
-//дальшне не смотреть, я не сделала 
+
 app.MapGet("get_note/{id:guid}", (Guid id) =>
 {
-    Note note = service.GetNoteById(id);
-
+    try
+    {
+        Note note = service.GetNoteById(id);
+        return Results.Ok(new NoteResponseDto(note.Id, note.Title, note.Content));
+    }
+    catch
+    {
+        return Results.NotFound();
+    }
 });
 
 app.MapDelete("delete_note/{id:guid}", (Guid id) =>
