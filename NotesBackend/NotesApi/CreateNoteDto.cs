@@ -1,0 +1,13 @@
+namespace NotesApi;
+
+public class CreateNoteDto
+{
+    public string Title { get; private set; }
+    public string Content { get; private set; }
+    
+    public CreateNoteDto(string title, string content)
+    {
+        Title = title;
+        Content = content;
+    }
+}
