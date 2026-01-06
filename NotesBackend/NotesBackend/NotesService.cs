@@ -2,26 +2,26 @@ namespace NotesBackend;
 
 public class NotesService
 {
-    private List<Note> notes;
+    private List<Note> _notes;
 
     public NotesService()
     {
-        notes = new List<Note>();
+        _notes = new List<Note>();
     }
     
     public void CreateNote(string title, string content)
     {
         Note note = new Note(title, content);
-        notes.Add(note);
+        _notes.Add(note);
     }
 
     public List<Note> GetNotes()
     {
-        return notes;
+        return _notes;
     }
     public Note GetNoteById(Guid id)
     {
-        foreach (var note in notes)
+        foreach (var note in _notes)
         {
             if  (note.Id == id)
                 return note;
@@ -31,11 +31,11 @@ public class NotesService
 
     public void DeleteNoteById(Guid id)
     {
-        foreach (var note in notes)
+        foreach (var note in _notes)
         {
             if (note.Id == id)
             {
-                notes.Remove(note);
+                _notes.Remove(note);
             } 
         }
         throw new Exception("Note not found");
