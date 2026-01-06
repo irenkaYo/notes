@@ -9,13 +9,14 @@ public class NotesService
         _notes = new List<Note>();
     }
     
-    public void CreateNote(string title, string content)
+    public Note CreateNote(string title, string content)
     {
         Note note = new Note(title, content);
         _notes.Add(note);
+        return note;
     }
 
-    public List<Note> GetNotes()
+    public IReadOnlyList<Note> GetNotes()
     {
         return _notes;
     }
@@ -31,13 +32,7 @@ public class NotesService
 
     public void DeleteNoteById(Guid id)
     {
-        foreach (var note in _notes)
-        {
-            if (note.Id == id)
-            {
-                _notes.Remove(note);
-            } 
-        }
-        throw new Exception("Note not found");
+        Note note = GetNoteById(id);
+        _notes.Remove(note);
     }
 }
