@@ -34,9 +34,9 @@ public class NoteApiHandler
         return await response.Content.ReadFromJsonAsync<NoteResponseDto>();
     }
     
-    public async Task<string> DeleteNoteAsync(Guid id)
+    public async Task<HttpStatusCode> DeleteNoteAsync(Guid id)
     {
         var response = await httpClient.DeleteAsync($"delete_note/{id}");
-        return response.StatusCode.ToString();
+        return response.StatusCode;
     }
 }

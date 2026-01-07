@@ -6,7 +6,7 @@ class Program
     private static NoteApiHandler noteApiHandler;
     static void Main()
     {
-        noteApiHandler = new NoteApiHandler("http://localhost:5000/");
+        noteApiHandler = new NoteApiHandler("http://localhost:5050/");
         int choice = 0;
         while (choice != 5)
         {
