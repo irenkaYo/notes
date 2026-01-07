@@ -37,8 +37,15 @@ app.MapGet("get_note/{id:guid}", (Guid id) =>
 
 app.MapDelete("delete_note/{id:guid}", (Guid id) =>
 {
-    service.DeleteNoteById(id);
-    return "Note deleted";//а если нет
+    try
+    {
+        service.DeleteNoteById(id);
+        return Results.Ok();
+    }
+    catch
+    {
+        return Results.NotFound();
+    }
 });
 
 app.Run();

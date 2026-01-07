@@ -32,7 +32,14 @@ public class NotesService
 
     public void DeleteNoteById(Guid id)
     {
-        Note note = GetNoteById(id);
-        _notes.Remove(note);
+        try
+        {
+            Note note = GetNoteById(id);
+            _notes.Remove(note);
+        }
+        catch 
+        {
+            throw new Exception("Note not found");
+        }
     }
 }
