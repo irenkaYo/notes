@@ -28,7 +28,7 @@ public class NoteApiHandler
         return await response.Content.ReadFromJsonAsync<List<NoteResponseDto>>();
     }
 
-    public async Task<NoteResponseDto>? GetNoteAsync(Guid id)
+    public async Task<NoteResponseDto?> GetNoteAsync(Guid id)
     {
         var response = await httpClient.GetAsync($"get_note/{id}");
         if (response.IsSuccessStatusCode)

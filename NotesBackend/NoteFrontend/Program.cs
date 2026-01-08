@@ -56,7 +56,7 @@ class Program
             {
                 Guid noteId = InputId();
                 var response = await noteApiHandler.DeleteNoteAsync(noteId);
-                Console.WriteLine(response);
+                Console.WriteLine(response.ToString());
                 break;
             }
             case 5:
