@@ -28,15 +28,20 @@ public class NoteApiHandler
         return await response.Content.ReadFromJsonAsync<List<NoteResponseDto>>();
     }
 
-    public async Task<NoteResponseDto> GetNoteAsync(Guid id)
+    public async Task<NoteResponseDto>? GetNoteAsync(Guid id)
     {
         var response = await httpClient.GetAsync($"get_note/{id}");
-        return await response.Content.ReadFromJsonAsync<NoteResponseDto>();
+        if (response.IsSuccessStatusCode)
+            return await response.Content.ReadFromJsonAsync<NoteResponseDto>();
+        return null;
     }
     
-    public async Task<HttpStatusCode> DeleteNoteAsync(Guid id)
+    public async Task<ErrorCode> DeleteNoteAsync(Guid id)
     {
         var response = await httpClient.DeleteAsync($"delete_note/{id}");
-        return response.StatusCode;
+        if (response.IsSuccessStatusCode)
+            return ErrorCode.Ok;
+        else
+            return ErrorCode.NotFound;
     }
 }

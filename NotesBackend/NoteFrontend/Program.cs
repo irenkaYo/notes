@@ -46,7 +46,10 @@ class Program
             {
                 Guid noteId = InputId();
                 var response = await noteApiHandler.GetNoteAsync(noteId);
-                DataOutput(response);
+                if (response != null)
+                    DataOutput(response);
+                else
+                    Console.WriteLine("Note not found");
                 break;
             }
             case 4:
